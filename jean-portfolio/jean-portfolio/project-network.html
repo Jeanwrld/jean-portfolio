@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Network Security Project | Jean</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700;900&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --color-black: #000000;
+            --color-white: #ffffff;
+            --color-gray: #f4f4f4;
+            --color-dark-gray: #333333;
+            --color-accent: #0071e3;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Merriweather', serif;
+            font-size: 18px;
+            line-height: 1.8;
+            color: var(--color-black);
+            background-color: var(--color-white);
+        }
+        
+        h1, h2, h3, h4, .logo, .nav-links a {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: -0.02em;
+        }
+        
+        h1 {
+            font-size: 8rem;
+            line-height: 0.9;
+            margin-bottom: 2rem;
+        }
+        
+        h2 {
+            font-size: 4.5rem;
+            margin-bottom: 4rem;
+        }
+        
+        h3 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        p {
+            margin-bottom: 2rem;
+        }
+        
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.4s ease;
+        }
+        
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        /* Navigation */
+        nav {
+    position:static;
+    top: 0;
+    width: 100%;
+    background-color: var(--color-white);
+    padding: 2rem 0;
+    z-index: 1000;
+    /* Remove mix-blend-mode: difference; */
+}
+        
+        .nav-container {
+            width: 90%;
+            max-width: 1600px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            color: var(--color-white);
+        }
+        
+        .nav-links a {
+            margin-left: 3rem;
+            color: var(--color-white);
+            font-weight: 700;
+            font-size: 1rem;
+            position: relative;
+        }
+        
+        .nav-links a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--color-white);
+            transition: width 0.4s ease;
+        }
+        
+        .nav-links a:hover:after {
+            width: 100%;
+        }
+        
+        /* Project Hero */
+        .project-hero {
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .project-hero-image {
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            transition: transform 1s ease;
+        }
+        
+        .project-hero-content {
+            position: absolute;
+            bottom: 10%;
+            left: 5%;
+            width: 90%;
+            max-width: 1600px;
+            color: var(--color-white);
+            z-index: 2;
+        }
+        
+        .project-subtitle {
+            font-size: 2rem;
+            font-weight: 300;
+            max-width: 800px;
+        }
+        
+        /* Overlay */
+        .project-hero:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(0,0,0,0.7), rgba(0,0,0,0.2));
+            z-index: 1;
+        }
+        
+        /* Container styles */
+        .project-container {
+            width: 90%;
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 15rem 0;
+        }
+        
+        /* Project Overview */
+        .project-overview {
+            background-color: var(--color-black);
+            color: var(--color-white);
+        }
+        
+        .project-details {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 3rem;
+            margin-bottom: 8rem;
+        }
+        
+        .detail-item h3 {
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            color: #888;
+        }
+        
+        .project-intro {
+            font-size: 2.5rem;
+            line-height: 1.3;
+            max-width: 1000px;
+        }
+        
+        /* Project Sections */
+        .project-section {
+            background-color: var(--color-white);
+        }
+        
+        .section-heading {
+            margin-bottom: 7rem;
+        }
+        
+        .section-content {
+            padding-left: 20%;
+        }
+        
+        .large-text {
+            font-size: 2.5rem;
+            line-height: 1.3;
+            margin-bottom: 4rem;
+            max-width: 900px;
+        }
+        
+        .alt-background {
+            background-color: var(--color-gray);
+        }
+        
+        /* Process Steps */
+        .process-step {
+            margin-bottom: 12rem;
+        }
+        
+        .process-image {
+            margin-top: 3rem;
+            width: 100%;
+            height: auto;
+        }
+        
+        .process-image img {
+            width: 100%;
+            height: auto;
+            transition: transform 0.5s ease;
+        }
+        
+        .process-image:hover img {
+            transform: scale(1.01);
+        }
+        
+        /* Features */
+        .skill-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 4rem;
+            margin: 5rem 0;
+        }
+        
+        .skill h3 {
+            position: relative;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .skill h3:before {
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 2px;
+            top: -10px;
+            left: 0;
+            background-color: var(--color-black);
+        }
+        
+        /* Solution Image */
+        .solution-image {
+            margin: 8rem 0;
+            overflow: hidden;
+        }
+        
+        .full-width {
+            margin-left: -20%;
+            width: 120%;
+        }
+        
+        /* Code Block */
+        .code-block {
+            background-color: #f8f8f8;
+            padding: 2rem;
+            margin: 3rem 0;
+            overflow-x: auto;
+            font-family: monospace;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        
+        /* Results Section */
+        .results-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+            margin-bottom: 5rem;
+        }
+        
+        .stat {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .stat-number {
+            font-size: 5rem;
+            font-weight: 900;
+            line-height: 1;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .stat-label {
+            font-size: 1.2rem;
+            margin-top: 1rem;
+        }
+        
+        /* Animations */
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .project-hero-content,
+        .project-details,
+        .project-intro,
+        .section-heading,
+        .large-text,
+        .process-step,
+        .skill-grid,
+        .solution-image,
+        .results-stats {
+            animation: fadeUp 1s ease-out;
+        }
+        
+        /* Media Queries */
+        @media (max-width: 1200px) {
+            h1 {
+                font-size: 6rem;
+            }
+            
+            h2 {
+                font-size: 3.5rem;
+            }
+            
+            .project-details {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .skill-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .section-content {
+                padding-left: 10%;
+            }
+            
+            .full-width {
+                margin-left: -10%;
+                width: 110%;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 4rem;
+            }
+            
+            h2 {
+                font-size: 2.8rem;
+            }
+            
+            .project-intro,
+            .large-text {
+                font-size: 1.8rem;
+            }
+            
+            .project-details {
+                grid-template-columns: 1fr;
+            }
+            
+            .section-content {
+                padding-left: 0;
+            }
+            
+            .full-width {
+                margin-left: 0;
+                width: 100%;
+            }
+            
+            .results-stats {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">JEAN</div>
+            <div class="nav-links">
+                <a href="index.html#work">WORK</a>
+                <a href="index.html#about">ABOUT</a>
+                <a href="index.html#contact">CONTACT</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Project Hero -->
+    <header class="project-hero">
+        <div class="project-hero-image" style="background-image: url('/api/placeholder/1600/900')"></div>
+        <div class="project-hero-content">
+            <h1>NETWORK SECURITY</h1>
+            <p class="project-subtitle">Cisco Packet Tracer Simulations</p>
+        </div>
+    </header>
+
+    <!-- Project Overview -->
+    <section class="project-overview">
+        <div class="project-container">
+            <div class="project-details">
+                <div class="detail-item">
+                    <h3>CLIENT</h3>
+                    <p>Academic Project</p>
+                </div>
+                <div class="detail-item">
+                    <h3>ROLE</h3>
+                    <p>Network Designer & Security Specialist</p>
+                </div>
+                <div class="detail-item">
+                    <h3>TECHNOLOGIES</h3>
+                    <p>Cisco Packet Tracer, LAN/WAN Configuration, Router & Switch Setup</p>
+                </div>
+                <div class="detail-item">
+                    <h3>TIMELINE</h3>
+                    <p>6 Months (2024)</p>
+                </div>
+            </div>
+            <div class="project-intro">
+                <p>A comprehensive networking project demonstrating proficiency in designing secure network infrastructures, implementing industry-standard protocols, and simulating real-world networking environments using Cisco Packet Tracer.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Challenge -->
+    <section class="project-section">
+        <div class="project-container">
+            <div class="section-heading">
+                <h2>01. THE CHALLENGE</h2>
+            </div>
+            <div class="section-content">
+                <p class="large-text">Designing secure, scalable network architectures for small to medium businesses with limited resources while ensuring industry-standard security protocols.</p>
+                
+                <p>Modern businesses face significant challenges in maintaining secure network environments while balancing functionality and cost. Small businesses particularly struggle with implementing enterprise-level security without dedicated IT staff or extensive budgets.</p>
+                
+                <p>The primary challenges included designing optimal network topologies for various business scenarios, implementing secure routing protocols, establishing proper access controls, and creating recovery procedures for network failures—all while remaining within realistic hardware and software constraints.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Process & Approach -->
+    <section class="project-section alt-background">
+        <div class="project-container">
+            <div class="section-heading">
+                <h2>02. PROCESS & APPROACH</h2>
+            </div>
+            <div class="section-content">
+                <div class="process-step">
+                    <h3>Requirements Analysis</h3>
+                    <p>I began by analyzing typical small business requirements, cybercafé operations, and ISP infrastructure needs. This research included studying traffic patterns, security vulnerabilities, and regulatory compliance requirements.</p>
+                    <div class="process-image">
+                        <img src="/api/placeholder/1400/800" alt="Network requirements analysis">
+                    </div>
+                </div>
+                
+                <div class="process-step">
+                    <h3>Network Design</h3>
+                    <p>Using Cisco Packet Tracer, I designed various network topologies addressing different business scenarios, focusing on security, scalability, and performance optimization.</p>
+                    <div class="process-image">
+                        <img src="/api/placeholder/1400/800" alt="Network topology design">
+                    </div>
+                </div>
+                
+                <div class="process-step">
+                    <h3>Implementation & Testing</h3>
+                    <p>Each network design was implemented in simulation environments with comprehensive testing scenarios including security penetration tests, failure recovery procedures, and performance benchmarking.</p>
+                    <div class="process-image">
+                        <img src="/api/placeholder/1400/800" alt="Network implementation testing">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Solution -->
+    <section class="project-section">
+        <div class="project-container">
+            <div class="section-heading">
+                <h2>03. EXPERTISE & SKILLS</h2>
+            </div>
+            <div class="section-content">
+                <p class="large-text">Comprehensive networking skills including LAN/WAN configuration, security implementation, and practical experience with both simulated and real-world environments.</p>
+                
+                <div class="skill-grid">
+                    <div class="skill">
+                        <h3>Networking & LAN/WAN Configuration</h3>
+                        <p>Design and implementation of network topologies with Cisco Packet Tracer certification to back up practical skills.</p>
+                    </div>
+                    <div class="skill">
+                        <h3>Fiber Optic Fundamentals</h3>
+                        <p>Understanding of fiber optic technologies and their application in modern network infrastructures.</p>
+                    </div>
+                    <div class="skill">
+                        <h3>PC/Software Troubleshooting</h3>
+                        <p>Practical experience resolving hardware and software issues in real-world environments.</p>
+                    </div>
+                    <div class="skill">
+                        <h3>Customer Service & Tech Support</h3>
+                        <p>Experience helping customers troubleshoot devices and access services in a cybercafé environment.</p>
+                    </div>
+                </div>
+                
+                <div class="solution-image full-width">
+                    <img src="/api/placeholder/1800/1000" alt="Network topology diagram">
+                </div>
+                
+                <h3>Technical Implementation</h3>
+                <p>The network simulations were built using Cisco Packet Tracer, implementing industry-standard protocols including OSPF, EIGRP, VLANs, ACLs, and various security measures like stateful firewalls and intrusion detection systems.</p>
+                
+                <div class="code-block">
+<pre>// Sample Router Configuration
+Router> enable
+Router# configure terminal
+Router(config)# hostname MainOfficeRouter
+MainOfficeRouter(config)# interface GigabitEthernet0/0
+MainOfficeRouter(config-if)# ip address 192.168.1.1 255.255.255.0
+MainOfficeRouter(config-if)# no shutdown
+MainOfficeRouter(config-if)# exit
+
+// Security Implementation
+MainOfficeRouter(config)# access-list 101 deny ip any host 192.168.1.100
+MainOfficeRouter(config)# access-list 101 permit ip any any
+MainOfficeRouter(config)# interface GigabitEthernet0/1
+MainOfficeRouter(config-if)# ip access-group 101 in</pre>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Results & Impact -->
+    <section class="project-section alt-background">
+        <div class="project-container">
+            <div class="section-heading">
+                <h2>04. PRACTICAL EXPERIENCE</h2>
+            </div>
+            <div class="section-content">
+                <div class="results-stats">
+                    <div class="stat">
+                        <span class="stat-number">10+</span>
+                        <span class="stat-label">Network Topologies</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">6</span>
+                        <span class="stat-label">Months Experience</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">100%</span>
+                        <span class="stat-label">Certification Score</span>
+                    </div>
+                </div>
+                
+                <p>Beyond the academic simulations, I've gained practical experience working in a cybercafé environment in Murang'a Town, helping customers troubleshoot devices and access services, maintaining systems and internet uptime, and advising users on safe browsing and file management practices.</p>
+                
+                <h3>Student Projects & Mentoring</h3>
+                <p>I've designed sample LAN topologies for student projects, simulated routing and switching tasks using Cisco Packet Tracer, and assisted classmates with practicals and tech-related tasks. This combination of theoretical knowledge and hands-on application has provided a well-rounded foundation in networking.</p>
+                
+                <h3>Education & Certifications</h3>
+                <p>Currently pursuing a Bachelor of Science in Computer Science at Murang'a University of Technology with a focus on networking and security. I hold a Cisco Packet Tracer certification and continuously enhance my skills through practical application.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Next Project -->
+    <section class="project-section">
+        <div class="project-container">
+            <div class="section-heading">
+                <h2>NEXT PROJECT</h2>
+            </div>
+            <div class="section-content">
+                <a href="project-monefy.html" style="display: block;">
+                    <h1 style="font-size: 6rem;">MONEFY →</h1>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>

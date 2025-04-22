@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monefy Project | Jean</title>
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --color-black: #000000;
+            --color-white: #ffffff;
+            --color-gray: #f4f4f4;
+            --color-dark-gray: #333333;
+            --color-accent: #0071e3;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Merriweather', serif;
+            font-size: 18px;
+            line-height: 1.8;
+            color: var(--color-black);
+            background-color: var(--color-white);
+        }
+        
+        h1, h2, h3, h4, .logo, .nav-links a {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: -0.02em;
+        }
+        
+        h1 {
+            font-size: 8rem;
+            line-height: 0.9;
+            margin-bottom: 2rem;
+        }
+        
+        h2 {
+            font-size: 4.5rem;
+            margin-bottom: 4rem;
+        }
+        
+        h3 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        p {
+            margin-bottom: 2rem;
+        }
+        
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.4s ease;
+        }
+        
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        /* Navigation */
+        nav {
+            position: static;
+            top: 0;
+            width: 100%;
+            background-color: var(--color-white);
+            padding: 2rem 0;
+            z-index: 1000;
+            mix-blend-mode: difference;
+        }
+        
+        .nav-container {
+            width: 90%;
+            max-width: 1600px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            color: var(--color-white);
+        }
+        
+        .nav-links a {
+            margin-left: 3rem;
+            color: var(--color-white);
+            font-weight: 700;
+            font-size: 1rem;
+            position: relative;
+        }
+        
+        .nav-links a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--color-white);
+            transition: width 0.4s ease;
+        }
+        
+        .nav-links a:hover:after {
+            width: 100%;
+        }
+        
+        /* Project Hero */
+        .project-hero {
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .project-hero-image {
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            transition: transform 1s ease;
+        }
+        
+        .project-hero-content {
+            position: absolute;
+            bottom: 10%;
+            left: 5%;
+            width: 90%;
+            max-width: 1600px;
+            color: var(--color-white);
+            z-index: 2;
+        }
+        
+        .project-subtitle {
+            font-size: 2rem;
+            font-weight: 300;
+            max-width: 800px;
+        }
+        
+        /* Overlay */
+        .project-hero:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(0,0,0,0.7), rgba(0,0,0,0.2));
+            z-index: 1;
+        }
+        
+        /* Container styles */
+        .project-container {
+            width: 90%;
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 15rem 0;
+        }
+        
+        /* Project Overview */
+        .project-overview {
+            background-color: var(--color-black);
+            color: var(--color-white);
+        }
+        
+        .project-details {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 3rem;
+            margin-bottom: 8rem;
+        }
+        
+        .detail-item h3 {
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            color: #888;
+        }
+        
+        .project-intro {
+            font-size: 2.5rem;
+            line-height: 1.3;
+            max-width: 1000px;
+        }
+        
+        /* Project Sections */
+        .project-section {
+            background-color: var(--color-white);
+        }
+        
+        .section-heading {
+            margin-bottom: 7rem;
+        }
+        
+        .section-content {
+            padding-left: 20%;
+        }
+        
+        .large-text {
+            font-size: 2.5rem;
+            line-height: 1.3;
+            margin-bottom: 4rem;
+            max-width: 900px;
+        }
+        
+        .alt-background {
+            background-color: var(--color-gray);
+        }
+        
+        /* Process Steps */
+        .process-step {
+            margin-bottom: 12rem;
+        }
+        
+        .process-image {
+            margin-top: 3rem;
+            width: 100%;
+            height: auto;
+        }
+        
+        .process-image img {
+            width: 100%;
+            height: auto;
+            transition: transform 0.5s ease;
+        }
+        
+        .process-image:hover img {
+            transform: scale(1.01);
+        }
+        
+        /* Features */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 4rem;
+            margin: 5rem 0;
+        }
+        
+        .feature h3 {
+            position: relative;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .feature h3:before {
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 2px;
+            top: -10px;
+            left: 0;
+            background-color: var(--color-black);
+        }
+        
+        /* Solution Image */
+        .solution-image {
+            margin: 8rem 0;
+            overflow: hidden;
+        }
+        
+        .full-width {
+            margin-left: -20%;
+            width: 120%;
+        }
+        
+        /* Code Block */
+        .code-block {
+            background-color: #f8f8f8;
+            padding: 2rem;
+            margin: 3rem 0;
+            overflow-x: auto;
+            font-family: monospace;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        
+        /* Results Section */
+        .results-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+            margin-bottom: 5rem;
+        }
+        
+        .stat {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .stat-number {
+            font-size: 5rem;
+            font-weight: 900;
+            line-height: 1;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .stat-label {
+            font-size: 1.2rem;
+            margin-top: 1rem;
+        }
+        
+        /* Animations */
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .project-hero-content,
+        .project-details,
+        .project-intro,
+        .section-heading,
+        .large-text,
+        .process-step,
+        .feature-grid,
+        .solution-image,
+        .results-stats {
+            animation: fadeUp 1s ease-out;
+        }
+        
+        /* Media Queries */
+        @media (max-width: 1200px) {
+            h1 {
+                font-size: 6rem;
+            }
+            
+            h2 {
+                font-size: 3.5rem;
+            }
+            
+            .project-details {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .section-content {
+                padding-left: 10%;
+            }
+            
+            .full-width {
+                margin-left: -10%;
+                width: 110%;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 4rem;
+            }
+            
+            h2 {
+                font-size: 2.8rem;
+            }
+            
+            .project-intro,
+            .large-text {
+                font-size: 1.8rem;
+            }
+            
+            .project-details {
+                grid-template-columns: 1fr;
+            }
+            
+            .section-content {
+                padding-left: 0;
+            }
+            
+            .full-width {
+                margin-left: 0;
+                width: 100%;
+            }
+            
+            .results-stats {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">JEAN</div>
+            <div class="nav-links">
+                <a href="index.html#work">WORK</a>
+                <a href="index.html#about">ABOUT</a>
+                <a href="index.html#contact">CONTACT</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Project Hero -->
+    <header class="project-hero">
+        <div class="project-hero-image" style="background-image: url('/api/placeholder/1600/900')"></div>
+        <div class="project-hero-content">
+            <h1>MONEFY</h1>
+            <p class="project-subtitle">Personal Finance Tracker</p>
+        </div>
+    </header>
+
+    <!-- Project Overview -->
+    <section class="project-overview">
+        <div class="project-container">
+            <div class="project-details">
+                <div class="detail-item">
+                    <h3>CLIENT</h3>
+                    <p>Personal Project</p>
+                </div>
+                <div class="detail-item">
+                    <h3>ROLE</h3>
+                    <p>Full-Stack Developer</p>
+                </div>
+                <div class="detail-item">
+                    <h3>TECHNOLOGIES</h3>
+                    <p>PHP (OOP), MySQL, JavaScript, HTML/CSS</p>
+                </div>
+                <div class="detail-item">
+                    <h3>TIMELINE</h3>
+                    <p>3 Months (2024)</p>
+                </div>
+            </div>
+            <div class="project-intro">
+                <p>Monefy is a comprehensive personal finance tracking system that helps users gain control over their financial lives through intuitive visualization and powerful tracking capabilities.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Challenge -->
+    <section class="project-section">
+        <div class="project-container">
+            <div class="section-heading">
+                <h2>01. THE CHALLENGE</h2>
+            </div>
+            <div class="section-content">
+                <p class="large-text">Creating an intuitive personal finance tracking system that balances comprehensive features with user simplicity.</p>
+                
+                <p>Many existing financial tracking tools are either too simplistic to provide meaningful insights or too complex for everyday users. The challenge was to develop a system that offers powerful financial management capabilities while maintaining an accessible user experience.</p>
+                
+                <p>Key challenges included designing an intuitive data model for financial information, creating meaningful visualizations of spending patterns, implementing secure user authentication, and balancing feature richness with ease of use.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Process & Approach -->
+    <section class="project-section alt-background">
+        <div class="project-container">
+            <div class="section-heading">
+                <h2>02. PROCESS & APPROACH</h2>
+            </div>
+            <div class="section-content">
+                <div class="process-step">
+                    <h3>Research & Planning</h3>
+                    <p>I began by analyzing existing finance tracking applications and identifying gaps in their functionality. This research informed the feature set and user experience goals.</p>
+                    <div class="process-image">
+                        <img src="/api/placeholder/1400/800" alt="Research and planning">
+                    </div>
+                </div>
+                
+                <div class="process-step">
+                    <h3>System Architecture</h3>
+                    <p>I developed a comprehensive database schema that would support all the required functionality while maintaining performance and scalability.</p>
+                    <div class="process-image">
+                        <img src="/api/placeholder/1400/800" alt="System architecture diagram">
+                    </div>
+                </div>
+                
+                <div class="process-step">
+                    <h3>User Interface Design</h3>
+                    <p>The UI was designed with a focus on clarity and visual hierarchy, ensuring that users could quickly understand their financial status at a glance.</p>
+                    <div class="process-image">
+                        <img src="/api/placeholder/1400/800" alt="User interface design">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Solution -->
+    <section class="project-section">
+        <div class="project-container">
+            <div class="section-heading">
+                <h2>03. SOLUTION</h2>
+            </div>
+            <div class="section-content">
+                <p class="large-text">A comprehensive financial management system with powerful tracking capabilities and intuitive data visualization.</p>
+                
+                <div class="feature-grid">
+                    <div class="feature">
+                        <h3>Expense Tracking</h3>
+                        <p>Categorized expense tracking with custom categories and tags.</p>
+                    </div>
+                    <div class="feature">
+                        <h3>Budget Management</h3>
+                        <p>Monthly and category-based budget creation with progress indicators.</p>
+                    </div>
+                    <div class="feature">
+                        <h3>Data Visualization</h3>
+                        <p>Interactive charts showing spending patterns and financial trends.</p>
+                    </div>
+                    <div class="feature">
+                        <h3>Recurring Transactions</h3>
+                        <p>Support for recurring income and expenses with customizable schedules.</p>
+                    </div>
+                </div>
+                
+                <div class="solution-image full-width">
+                    <img src="/api/placeholder/1800/1000" alt="Monefy dashboard">
+                </div>
+                
+                <h3>Technical Implementation</h3>
+                <p>The application was built using object-oriented PHP with a carefully designed data model, MySQL database with optimized schema design, and a responsive frontend using HTML5, CSS3, and JavaScript with Chart.js for visualizations.</p>
+                
+                <div class="code-block">
+<pre>// Example of the Transaction class structure
+class Transaction {
+    private $id;
+    private $userId;
+    private $amount;
+    private $categoryId;
+    private $description;
+    private $date;
+    private $type; // 'income' or 'expense'
+    
+    // Constructor, getters, setters...
+    
+    public function save() {
+        // Database interaction logic
+    }
+    
+    public static function getByUserId($userId, $limit = 10) {
+        // Retrieves user transactions
+    }
+    
+    public static function getMonthlyTotals($userId, $type) {
+        // Calculates monthly totals for charts
+    }
+}</pre>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Results & Impact -->
+    <section class="project-section alt-background">
+        <div class="project-container">
+            <div class="section-heading">
+                <h2>04. RESULTS & IMPACT</h2>
+            </div>
+            <div class="section-content">
+                <div class="results-stats">
+                    <div class="stat">
+                        <span class="stat-number">85%</span>
+                        <span class="stat-label">User Satisfaction</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">30+</span>
+                        <span class="stat-label">Active Users</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">500+</span>
+                        <span class="stat-label">Transactions Tracked</span>
+                    </div>
+                </div>
+                
+                <p>The Monefy application has helped users gain better control over their finances through clear visualization and organization of their financial data. Key outcomes include increased awareness of spending patterns, improved budget adherence through regular tracking, and simplified financial decision-making through data insights.</p>
+                
+                <h3>Lessons Learned</h3>
+                <p>Building Monefy reinforced the importance of user-centered design in complex applications. I learned that even for data-heavy applications, the user interface must remain intuitive and focused on the most important information.</p>
+                
+                <h3>Future Development</h3>
+                <p>Future plans include implementing machine learning for spending predictions, adding mobile applications, and creating an API for integration with banking services.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Next Project -->
+    <section class="project-section">
+        <div class="project-container">
+            <div class="section-heading">
+                <h2>NEXT PROJECT</h2>
+            </div>
+            <div class="section-content">
+                <a href="project-budgetify.html" style="display: block;">
+                    <h1 style="font-size: 6rem;">BUDGETIFY →</h1>
+                </a>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
